@@ -1,0 +1,283 @@
+*{
+    box-sizing: border-box;
+}
+
+body.theme-1 , body.theme-2, body.theme-3{
+    font-family: "League Spartan", sans-serif;
+    font-size: 32px;
+}
+
+body.theme-1{
+    background-color: hsl(222, 26%, 31%);
+    --del-reset-bg: hsl(225, 21%, 49%);
+    --buttons-bg: hsl(0, 0%, 90%);
+    --del-reset-text: white;
+    --buttons-text: hsl(221, 14%, 31%);
+    --span-text : white;
+    --span-box-shadow : 1px 1px 1px rgba(0, 0, 0, 0.5);
+    --buttons-and-theme-changer-bg : hsl(223, 31%, 20%);
+    --resault-bg: hsl(224, 36%, 15%);
+    --circle-changer-equal-bg: hsl(6, 63%, 50%);
+    --equal-txt : white;
+    --buttons-box-shadow: inset 0 -3px 0 hsl(28, 16%, 65%);
+    --equal-box-shadow: inset 0 -3px 0 hsl(6, 70%, 34%);
+    --reset-and-del-box-shadow: inset 0 -3px 0 hsl(224, 28%, 35%);
+    --reset-del-active-bg: hsl(223, 25%, 70%);
+    --equal-and-circle-changer-active-bg: hsl(6, 56%, 56%);
+    --buttons-active-bg: white;
+}
+
+body.theme-2{
+    background-color: var(--Gray200);
+    --del-reset-bg: hsl(185, 42%, 37%);
+    --buttons-bg: hsl(0, 0%, 90%);
+    --del-reset-text: white;
+    --buttons-text: hsl(60, 10%, 19%);
+    --span-text : hsl(60, 10%, 19%);
+    --span-box-shadow : 0px 0px 0px rgba(0, 0, 0, 0.5);
+    --buttons-and-theme-changer-bg : hsl(0, 5%, 81%);
+    --resault-bg: hsl(0, 0%, 93%);
+    --circle-changer-equal-bg: hsl(25, 98%, 40%);
+    --equal-txt : white;
+    --buttons-box-shadow: inset 0 -3px 0 hsl(35, 11%, 61%);
+    --equal-box-shadow: inset 0 -3px 0 hsl(25, 99%, 27%);
+    --reset-and-del-box-shadow: inset 0 -3px 0 hsl(185, 58%, 25%);
+    --reset-del-active-bg: hsl(177, 37%, 50%);
+    --equal-and-circle-changer-active-bg: hsl(25, 60%, 72%);
+    --buttons-active-bg: white;
+}
+
+
+body.theme-3{
+    background-color: hsl(268, 75%, 9%);
+    --del-reset-bg: hsl(281, 89%, 26%);
+    --buttons-bg: hsl(268, 47%, 21%);
+    --del-reset-text: white;
+    --buttons-text: hsl(52, 100%, 62%);
+    --span-text : hsl(52, 100%, 62%);
+    --span-box-shadow : 0px 0px 0px rgba(0, 0, 0, 0.5);
+    --buttons-and-theme-changer-bg : hsl(268, 71%, 12%);
+    --resault-bg: hsl(268, 71%, 12%);
+    --circle-changer-equal-bg: hsl(176, 100%, 44%);
+    --equal-txt : hsl(198, 20%, 13%);
+    --buttons-box-shadow: inset 0 -3px 0 hsl(290, 70%, 36%);
+    --equal-box-shadow: inset 0 -3px 0 hsl(177, 92%, 70%);
+    --reset-and-del-box-shadow: inset 0 -3px 0 hsl(285, 91%, 52%);
+    --reset-del-active-bg: hsl(281, 39%, 41%);
+    --equal-and-circle-changer-active-bg: hsl(178, 59%, 70%);
+    --buttons-active-bg: hsl(281, 43%, 40%);
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+span{
+    color: var(--span-text);
+}
+
+.calculator-header{
+    display: flex;
+    justify-content: space-between;
+    width: 25%;
+    margin-bottom: 20px;
+}
+
+.calc-logo span{
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.theme-changer-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.theme-changer-container span{
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-shadow: var(--span-box-shadow);
+}
+
+.theme-changer-with-numbers{
+    position: relative;
+}
+
+.theme1-number , .theme2-number , .theme3-number{
+    position: absolute;
+    top:-15px;
+    font-size: 11px !important;
+}
+
+.theme1-number{
+    right: 48px;
+}
+
+.theme2-number{
+    right: 26px;
+}
+
+.theme3-number{
+    right: 5px;
+}
+
+.theme-changer{
+    display: flex;
+    align-items: center;
+    background-color: var(--buttons-and-theme-changer-bg);
+    height: 20px;
+    width: 60px;
+    border-radius: 40px;
+    cursor: pointer;
+}
+
+.circle-changer{
+    background-color: var(--circle-changer-equal-bg);
+    height: 14px;
+    width: 14px;
+    border-radius: 20px;
+    margin-left: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s linear;
+}
+
+.resault-container{
+    display: flex;
+    align-items: center;
+    direction: rtl;
+    background-color: var(--resault-bg);
+    height: 85px;
+    width: 25%;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.resault-container div{
+    font-size: 38px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.resault{
+    color: var(--span-text);
+}
+
+.calculator-btns{
+    background-color: var(--buttons-and-theme-changer-bg);
+    width: 25%;
+    padding: 18px 13px;
+    border-radius: 10px;
+}
+
+.calculator-numbers{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    column-gap: 0px;
+    row-gap: 15px;
+}
+
+.calculator-numbers button{
+    margin: auto;
+    background-color: var(--buttons-bg);
+    font-family: "League Spartan", sans-serif;
+    width: 80%;
+    font-size: 25px;
+    font-weight: 700;
+    color: var(--buttons-text);
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    padding: 5px 8px;
+    box-shadow: var(--buttons-box-shadow);
+    cursor: pointer;
+}
+
+#del-btn{
+    background-color: var(--del-reset-bg);
+    color: var(--del-reset-text);
+    font-size: 18px;
+    padding: 9px;
+    box-shadow: var(--reset-and-del-box-shadow);
+}
+
+.calculator-actions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 15px;
+    margin-top: 15px;
+}
+
+.calculator-actions button{
+    font-family: "League Spartan", sans-serif;
+    width: 45%;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.reset-action{
+    background-color: var(--del-reset-bg);
+    color: white;
+    box-shadow: var(--reset-and-del-box-shadow);
+}
+
+.equal-action{
+    background-color: var(--circle-changer-equal-bg);
+    color: var(--equal-txt);
+    box-shadow: var(--equal-box-shadow);
+}
+
+.calculator-numbers button:active{
+    background-color: var(--buttons-active-bg);
+}
+
+.reset-action:active, #del-btn:active{
+    background-color: var(--reset-del-active-bg);
+}
+
+.equal-action:active, .circle-changer:active{
+    background-color: var(--equal-and-circle-changer-active-bg);
+}
+
+@media (max-width: 1200px){
+    .calculator-header, .resault-container, .calculator-btns{
+        width: 30%;
+    }
+}
+
+@media (max-width: 700px){
+    .calculator-header, .resault-container, .calculator-btns{
+        width: 50%;
+    }
+}
+
+@media (max-width: 400px){
+    body{
+        margin: 0 30px;
+    }
+    .calculator-header, .resault-container, .calculator-btns{
+        width: 100%;
+    }
+    
+}
+
+@media (max-width: 375px){
+    body{
+        margin: 0 30px;
+    }
+    .calculator-header, .resault-container, .calculator-btns{
+        width: 100%;
+    }
+    
+}
