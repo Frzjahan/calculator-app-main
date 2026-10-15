@@ -15,24 +15,33 @@ const equal = document.querySelector('.equal-action');
 let total = null;
 let operator = null;
 let waitingForNumber = false;
-let hasPoint = false;
+let input = '0';
+
+function render(){
+    const [whole, fraction] = input.split('.');
+
+    const grouped = Number(whole).toLocaleString('en-US');
+
+    resault.textContent = fraction === undefined ? resault.textContent = grouped : `${grouped}.${fraction}`;
+}
 
 const num = numbers.forEach((number) =>{
     number.addEventListener('click', () =>{
+        const digit = number.textContent;
+
         if(waitingForNumber){
-            resault.textContent = number.textContent;
+            input = digit;
             waitingForNumber = false;
+            render()
             return;
         }
-        if(resault.textContent.length < 15){
-            if(resault.textContent === '0'){
-                resault.textContent = number.textContent
-            }
-            else{
-                resault.textContent += number.textContent
-                resault.textContent = Number(resault.textContent.replace(/,/g, '')).toLocaleString('en-US');
-            }
+        if(input.replace('.', '').length >= 15){
+            return;
         }
+
+        input = input === '0' ? digit : input + digit;
+
+        render()
     })
 })
 
@@ -40,25 +49,21 @@ function chooseOperator(newOperator){
 
     if(waitingForNumber){
         operator = newOperator;
-        resault.textContent = `${newOperator} ${total.toLocaleString('en-US')}`;
         return; 
     }
 
-    const currentNumber = Number(resault.textContent.replace(/,/g, ''));
+    const currentNumber = Number(input);
 
     if(total === null){
         total = currentNumber;
-    }
-
-    else if(operator !== null){
+    } else if(operator !== null){
         total = calculate(total, currentNumber, operator)
     }
 
     operator = newOperator;
     waitingForNumber = true;
-    hasPoint = false;
-
-    resault.textContent = `${newOperator} ${total.toLocaleString('en-US')}`;
+    input = String(total);
+    render();
 }
 
 function calculate(firstNumber, secondNumber, operator){
@@ -97,33 +102,31 @@ divided.addEventListener('click', ()=>{
 })
 
 points.addEventListener('click', ()=>{
-    if(hasPoint === false){
-        resault.textContent += points.textContent;
-        hasPoint = true;
+    if(!input.includes('.')){
+        input += '.';
+        render();
     }
 })
 
 equal.addEventListener('click', ()=>{
 
+    if(waitingForNumber){
+        return;
+    }
+
     if(total === null || operator === null){
         return;
     }
 
-    if(hasPoint === false){
-        resault.textContent += points.textContent;
-        hasPoint = true;
-    }
-
-    const currentNumber = Number(resault.textContent.replace(/,/g, ''));
+    const currentNumber = Number(input);
 
     total = calculate(total, currentNumber, operator);
 
-    resault.textContent = total.toLocaleString('en-US');
+    input = String(total);
+    render();
 
-    total = null;
     operator = null;
-    waitingForNumber = false;
-    hasPoint = false;
+    waitingForNumber = true;
 });
 
 deleteBtn.addEventListener('click', ()=>{
@@ -132,24 +135,23 @@ deleteBtn.addEventListener('click', ()=>{
         return;
     }
 
-    if(resault.textContent.endsWith('.')){
-        hasPoint = false;
+    if(input.length > 1){
+        input = input.slice(0, -1)
+    } else{
+        input = '0';
     }
 
-    resault.textContent = resault.textContent.slice(0 , -1)
-
-    if(resault.textContent === ''){
-        resault.textContent = '0'
-    }
+    render();
 })
 
 resetAction.addEventListener('click', ()=>{
-    resault.textContent = '0';
+    input = '0';
 
     total = null;
     operator = null;
     waitingForNumber = false;
-    hasPoint = false;
+    
+    render();
 })
 
 let clickCount = 0;
